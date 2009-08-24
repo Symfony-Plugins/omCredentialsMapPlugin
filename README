@@ -1,0 +1,29 @@
+On large project, check security is a misery. This plugin allow you to check the all the credentials in your project and detect action not or bad securised.
+
+It produce a text report based on the security.yml files.
+
+This work was originaly realized for [PMSIpilot](http://www.pmsipilot.com)
+
+usage : ``php symfony dev-utils:credentials-map ``
+
+**sample output** : 
+
+
+    ======================================================================pmsipilot======================================================================
+     pmsipilot                                    admin                              anonymiseur : admin_mco_donnees
+     pmsipilot                                    admin                                   atypie : acces_dossiers_medicaux AND acces_mco
+     pmsipilot                                    admin                       baseMessageAccueil : acces_mco
+     pmsipilot                                    admin                                coherence : admin_mco_donnees
+     pmsipilot                                    admin                                    datim : acces_dossiers_medicaux AND acces_mco
+     pmsipilot                                    admin                                detailRss : acces_dossiers_medicaux AND acces_mco
+    ======================================================================portail======================================================================
+       portail                                  accueil                                    index : OFF
+       portail                                  accueil                                 saveData : OFF
+       portail                                  default                       checkcalculencours : OFF
+
+colums are : app, module, action, credentials
+
+**TODO** : 
+
+*  deal with environnment and module activation
+*  check results on various configuration 
