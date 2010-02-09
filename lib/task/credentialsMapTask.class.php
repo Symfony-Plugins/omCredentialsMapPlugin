@@ -16,10 +16,7 @@ class credentialsMapTask extends sfBaseTask
 
   protected function execute($arguments = array(), $options = array())
   {
-
-    set_time_limit(3600);
-
-    $credentials_map = array();
+  $credentials_map = array();
     // detection des applications
     $apps = sfFinder::type('dir')->maxdepth(0)->relative()->sort_by_name()->in(sfConfig::get('sf_apps_dir'));
     foreach ($apps as $app)
@@ -32,7 +29,6 @@ class credentialsMapTask extends sfBaseTask
         $actions = self::getActions($module);
         foreach ($actions as $action)
         {
-          //          die(var_dump(self::getCredentials($app, basename($module), $action)));
           $credentials_map[$app][basename($module)][$action] = self::getCredentials($app, basename($module), $action);
         }
       }
@@ -42,7 +38,7 @@ class credentialsMapTask extends sfBaseTask
       $settings = sfYaml::load(sfConfig::get('sf_root_dir').'/apps/'.$app.'/config/settings.yml');
       // TODO : gère uniquement les modules activés dans tous les environnement
       $modules = $settings['all']['.settings']['enabled_modules'];
-      foreach (sfFinder::type('dir')->in(sfConfig::get('sf_plugins_dir')) as $dir)
+      foreach (sfFinder::type('dir')->maxdepth(0)->in(sfConfig::get('sf_plugins_dir')) as $dir)
       {
         foreach ($modules as $module_name)
         {
@@ -113,7 +109,7 @@ class credentialsMapTask extends sfBaseTask
         }
       }
     }
-    $other_action_files = sfFinder::type('file')->name('*Action.class.php')->in($module_path.'/actions/');
+    $other_action_files = sfFinder::type('file')->maxdepth(0)->name('*Action.class.php')->in($module_path.'/actions/');
     foreach ($other_action_files as $action_file)
     {
       $to_return[] = str_replace('Action.class.php', '', basename($action_file));
@@ -128,8 +124,7 @@ class credentialsMapTask extends sfBaseTask
     $configFiles[] = sfConfig::get('sf_root_dir').'/apps/'.$app_name."/config/security.yml";
     $configFiles[] = sfConfig::get('sf_root_dir').'/apps/'.$app_name."/modules/".$module_name."/config/security.yml";
 
-    //$plugin_security = sfFinder::type('file')->name('security.yml')->in(sfConfig::get('sf_plugins_dir').'/*/modules/'.$module_name.'/config/');
-    foreach (sfFinder::type('dir')->in(sfConfig::get('sf_plugins_dir')) as $dir)
+    foreach (sfFinder::type('dir')->maxdepth(0)->in(sfConfig::get('sf_plugins_dir')) as $dir)
     {
       if (file_exists($dir.'/modules/'.$module_name.'/config/security.yml'))
       {
