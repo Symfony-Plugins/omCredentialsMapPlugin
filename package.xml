@@ -10,10 +10,10 @@
   <email>omansour@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2009-08-24</date>
- <time>16:43:35</time>
+ <date>2010-02-09</date>
+ <time>09:43:35</time>
  <version>
-  <release>0.1.0</release>
+  <release>0.1.1</release>
   <api>1.0.0</api>
  </version>
  <stability>
