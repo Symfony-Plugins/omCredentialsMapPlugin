@@ -10,10 +10,10 @@
   <email>omansour@gmail.com</email>
   <active>yes</active>
  </lead>
- <date>2010-02-09</date>
+ <date>2010-04-19</date>
  <time>09:43:35</time>
  <version>
-  <release>0.1.1</release>
+  <release>0.1.2</release>
   <api>1.0.0</api>
  </version>
  <stability>
@@ -43,7 +43,7 @@
     <name>symfony</name>
     <channel>pear.symfony-project.com</channel>
     <min>1.2.0</min>
-    <max>1.2.0</max>
+    <max>1.4.3</max>
    </package>
   </required>
  </dependencies>

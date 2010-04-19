@@ -122,7 +122,10 @@ class credentialsMapTask extends sfBaseTask
     $configFiles = array();
     $configFiles[] = sfConfig::get('sf_root_dir')."/lib/vendor/symfony/lib/config/config/security.yml";
     $configFiles[] = sfConfig::get('sf_root_dir').'/apps/'.$app_name."/config/security.yml";
-    $configFiles[] = sfConfig::get('sf_root_dir').'/apps/'.$app_name."/modules/".$module_name."/config/security.yml";
+    if(file_exists(sfConfig::get('sf_root_dir').'/apps/'.$app_name."/modules/".$module_name."/config/security.yml"))
+    {
+      $configFiles[] = sfConfig::get('sf_root_dir').'/apps/'.$app_name."/modules/".$module_name."/config/security.yml";
+    }
 
     foreach (sfFinder::type('dir')->maxdepth(0)->in(sfConfig::get('sf_plugins_dir')) as $dir)
     {
@@ -209,7 +212,7 @@ class credentialsMapTask extends sfBaseTask
     $arr_methods = array();
     foreach ($arr as $line)
     {
-      if (ereg ('function ([_A-Za-z0-9]+)', $line, $regs))
+      if (preg_match ('/function ([_A-Za-z0-9]+)/', $line, $regs))
       $arr_methods[] = $regs[1];
     }
     return $arr_methods;
